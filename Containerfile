@@ -5,7 +5,7 @@ ARG num_cpus
 ARG zfs_release
 
 RUN pacman --noconfirm -Syu && \
-  pacman --noconfirm -S linux linux-headers base-devel git && \
+  pacman --noconfirm -S linux linux-headers base-devel git glibc && \
   useradd arch && \
   git clone https://aur.archlinux.org/zfs-utils.git && \
   git clone https://aur.archlinux.org/zfs-linux.git && \
