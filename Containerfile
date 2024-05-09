@@ -12,14 +12,16 @@ RUN pacman --noconfirm -Syu && \
   mkdir -p /home/arch/.gnupg && \
   chown -R arch /home/arch /zfs-utils /zfs-linux && \
   sed -i "s/^#MAKEFLAGS=\"-j2\"/MAKEFLAGS=\"-j$num_cpus\"/g" /etc/makepkg.conf && \
-  sed -i "s/^_kernelver=\".*\"/_kernelver=\"$(pacman -Q linux | cut -d ' ' -f 2)\"/g" /zfs-linux/PKGBUILD && \
-  sed -i "s/^_kernelver_full=\".*\"/_kernelver_full=\"$(pacman -Q linux | cut -d ' ' -f 2)\"/g" /zfs-linux/PKGBUILD && \
-  sed -i "s/^_zfsver=\".*\"/_zfsver=\"$zfs_release\"/g" /zfs-linux/PKGBUILD && \
   sed -i "s/^pkgver=\".*\"/pkgver=\"$zfs_release\"/g" /zfs-utils/PKGBUILD
 
 USER arch
 
+COPY PKGBUILD.zfs-linux /zfs-linux/PKGBUILD
+
 RUN gpg --recv-keys $zfs_gpg_key && \
+  sed -i "s/^_kernelver=\".*\"/_kernelver=\"$(pacman -Q linux | cut -d ' ' -f 2)\"/g" /zfs-linux/PKGBUILD && \
+  sed -i "s/^_kernelver_full=\".*\"/_kernelver_full=\"$(pacman -Q linux | cut -d ' ' -f 2)\"/g" /zfs-linux/PKGBUILD && \
+  sed -i "s/^_zfsver=\".*\"/_zfsver=\"$zfs_release\"/g" /zfs-linux/PKGBUILD && \
   cd /zfs-utils && \
   makepkg
 
