@@ -28,6 +28,6 @@ USER arch
 
 RUN cd /zfs-linux && \
   sed -i "s/^_kernelver=\".*\"/_kernelver=\"$(pacman -Q linux | cut -d ' ' -f 2)\"/g" /zfs-linux/PKGBUILD && \
-  sed -i "s/^_kernelver_full=\".*\"/_kernelver_full=\"$(pacman -Q linux | cut -d ' ' -f 2)\"/g" /zfs-linux/PKGBUILD && \
+  sed -i "s/^_kernelver_full=\".*\"/_kernelver_full=\"$(ls /usr/lib/modules/)\"/g" /zfs-linux/PKGBUILD && \
   sed -i "s/^_zfsver=\".*\"/_zfsver=\"$zfs_release\"/g" /zfs-linux/PKGBUILD && \
   makepkg
