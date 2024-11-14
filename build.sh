@@ -11,7 +11,7 @@ if ls *.zst 1> /dev/null 2>&1; then
   exit 1
 fi
 
-podman pull docker.io/library/archlinux
+podman pull docker.io/artixlinux/artixlinux
 podman build -t buildzfs --build-arg=zfs_release=${ZFS_RELEASE} --build-arg=zfs_gpg_key=${ZFS_GPG_KEY} --build-arg=num_cpus=${NUM_CPUS} --build-arg=old_sha=${OLD_ZFS_SHA} --build-arg=new_sha=${NEW_ZFS_SHA} .
 
 packages=$(podman run --name=buildzfs buildzfs bash -c "ls /zfs-*/*.zst")
