@@ -3,8 +3,6 @@ FROM archlinux
 ARG zfs_gpg_key
 ARG num_cpus
 ARG zfs_release
-ARG old_sha
-ARG new_sha
 
 RUN pacman --noconfirm -Syu && \
   pacman --noconfirm -S linux-lts linux-lts-headers base-devel git glibc && \
@@ -33,5 +31,4 @@ RUN cd /zfs-linux-lts && \
   sed -i "s/^_kernelver_full=\".*\"/_kernelver_full=\"$(ls /usr/lib/modules/)\"/g" /zfs-linux-lts/PKGBUILD && \
   sed -i "s/^_extramodules=\".*\"/_extramodules=\"$(ls /usr/lib/modules/)\"/g" /zfs-linux-lts/PKGBUILD && \
   sed -i "s/^_zfsver=\".*\"/_zfsver=\"$zfs_release\"/g" /zfs-linux-lts/PKGBUILD && \
-  sed -i "s/$old_sha/$new_sha/g" /zfs-linux-lts/PKGBUILD && \
   makepkg
