@@ -1,8 +1,8 @@
 #!/bin/bash -e
 
 NUM_CPUS="${NUM_CPUS:=4}"
-ZFS_GPG_KEY="${ZFS_GPG_KEY:=6AD860EED4598027}"
-ZFS_RELEASE="${ZFS_RELEASE:=2.3.2}"
+ZFS_GPG_KEY="${ZFS_GPG_KEY:=0AB9E991C6AF658B}"
+ZFS_RELEASE="${ZFS_RELEASE:=2.3.3}"
 
 if ls *.zst 1> /dev/null 2>&1; then
   echo "Found existing packages in current directory, please remove before executing."
