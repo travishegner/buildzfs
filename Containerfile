@@ -7,8 +7,8 @@ ARG zfs_release
 RUN pacman --noconfirm -Syu && \
   pacman --noconfirm -S linux-lts linux-lts-headers base-devel git glibc && \
   useradd arch && \
-  git clone https://aur.archlinux.org/zfs-utils.git && \
-  git clone https://aur.archlinux.org/zfs-linux-lts.git && \
+  $(git clone https://aur.archlinux.org/zfs-utils.git || git clone https://aur.archlinux.org/zfs-utils.git) && \
+  $(git clone https://aur.archlinux.org/zfs-linux-lts.git || git clone https://aur.archlinux.org/zfs-linux-lts.git) && \
   mkdir -p /home/arch/.gnupg && \
   chown -R arch /home/arch /zfs-utils /zfs-linux-lts && \
   sed -i "s/^#MAKEFLAGS=\"-j2\"/MAKEFLAGS=\"-j$num_cpus\"/g" /etc/makepkg.conf
