@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-NUM_CPUS="${NUM_CPUS:=4}"
+NUM_CPUS="${NUM_CPUS:=$(cat /proc/cpuinfo | grep processor | wc -l)}"
 ZFS_GPG_KEY="${ZFS_GPG_KEY:=6AD860EED4598027}"
 ZFS_RELEASE="${ZFS_RELEASE:=2.4.4}"
 
